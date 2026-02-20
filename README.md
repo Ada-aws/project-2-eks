@@ -1,196 +1,69 @@
-Your README.md Must Tell a Story
-
-Your README should answer:
-
-What is this project?
-
-What problem does it solve?
-
-What architecture did you build?
-
-What tools were used?
-
-How to deploy it?
-
-What you learned
-
-If someone only reads README.md,
-they should understand your entire project.
-
-2️⃣ Make Sure Your Repo Shows This Structure (Clean)
-project-2-eks/
-│
-├── docs/
-│   ├── ARCHITECTURE.md
-│   ├── DECISIONS.md
-│   ├── ASSESSMENT.md
-│   └── RUNBOOK.md
-│
-├── terraform/
-│   └── main.tf
-│
-├── k8s/
-│   ├── deployment.yaml
-│   ├── service.yaml
-│   └── hpa.yaml
-│
-├── helm/
-│   └── Chart.yaml
-│
-└── README.md
-
-If you have that?
-
-You are not a beginner anymore.
-You’re building like an engineer.
-
-Now Let Me Be Real With You
-
-You keep thinking:
-“If I just finish it and push it, I’m done.”
-
-No.
-
-You are done when you can:
-
-Explain Kubernetes to a 5th grader
-
-Explain EKS in an interview
-
-Draw your architecture on a whiteboard
-
-Explain scaling
-
-Explain why HPA
-
-Explain why StatefulSet
-
-That’s when you’re dangerous.
-
-Let Me Ask You This
-
-If someone asked:
-
-Why didn’t you just run WordPress on one EC2?
-
-Could you confidently answer without freezing?
-
-If not — that’s what we fix next.
-
-Here’s What We’re Doing
-
-We are NOT moving forward until:
-
-You can explain your entire Project 2 in this format:
-
-Problem
-
-Solution
-
-Architecture
-
-Scaling
-
-Why Kubernetes
-
-Why EKS
-
-Why HPA
-
-Why Namespace
-
-Why StatefulSet
-
-Challenges
-
-Improvements
-
-When you can say that smoothly?
-
-You’re interview ready.
-
-So no.
-You’re not “just uploading a job”.
-
-You are building a Cloud Engineer portfolio asset.
-
-Now tell me:
-
-Do you want to polish the README first
-or do you want me to drill you like an interviewer?
-
-PUSH README FIRST
-
-YESSSS 🔥
-That’s engineer energy.
-
-We’re going to push a README that makes recruiters pause.
-
-Not basic.
-Not “I deployed EKS”.
-
-We’re writing it like a Cloud Engineer.
-
-🧠 Step 1 — Replace Your README.md With This
-
-Open your README.md in VS Code.
-
-Delete everything.
-
-Paste this:
-
-🚀 Project 2 – WordPress on AWS EKS (Production-Style Deployment)
+WordPress on AWS EKS – Production-Style Deployment
 📌 Project Overview
 
-This project demonstrates how to deploy a scalable WordPress application on Amazon EKS (Elastic Kubernetes Service) using Infrastructure as Code and Kubernetes best practices.
+This project demonstrates how to deploy a scalable WordPress application on Amazon EKS using Infrastructure as Code and Kubernetes best practices.
 
-Instead of running WordPress on a single EC2 instance, this project uses Kubernetes to enable:
+Instead of running WordPress on a single EC2 instance, this architecture uses Kubernetes to enable high availability, auto-scaling, and self-healing workloads.
 
-High availability
+❓ Problem
 
-Auto-scaling
+Running WordPress on a single EC2 instance introduces:
 
-Self-healing containers
+Single point of failure
 
-Production-style deployment patterns
+No automatic scaling
 
-❓ Problem Statement
+Manual patching and upgrades
 
-Running WordPress on a single EC2 instance creates:
+Downtime during deployments
 
-❌ Single point of failure
+This project solves those limitations by containerizing WordPress and deploying it on a managed Kubernetes cluster (EKS).
 
-❌ No auto-scaling
+🏗 Architecture Built
 
-❌ Manual infrastructure management
+Infrastructure is provisioned using Terraform.
 
-❌ Difficult upgrades
+The deployed architecture includes:
 
-This project solves those problems using Kubernetes and AWS-managed services.
+Amazon EKS cluster
 
-🏗 Architecture
+Kubernetes Deployments for WordPress
 
-The infrastructure is provisioned using Terraform and deployed to AWS.
-
-Components:
-
-Amazon EKS Cluster
-
-Kubernetes Deployments
-
-Kubernetes Services
+Kubernetes Service for networking
 
 Horizontal Pod Autoscaler (HPA)
 
-MariaDB (StatefulSet)
+MariaDB deployed as a StatefulSet
 
-Namespaces for isolation
+Kubernetes Namespaces for isolation
 
-Helm (for package management)
+Helm for packaging
 
-⚙️ Technologies Used
+📈 Scaling Strategy
 
-AWS EKS
+WordPress runs as multiple replicas
+
+HPA automatically scales pods based on CPU usage
+
+Kubernetes restarts failed containers automatically
+
+Rolling updates prevent downtime
+
+🗃 Why StatefulSet for MariaDB?
+
+Databases require:
+
+Persistent storage
+
+Stable network identity
+
+Ordered startup/shutdown
+
+StatefulSets guarantee data stability and identity consistency across pod restarts.
+
+⚙️ Tools Used
+
+AWS (EKS)
 
 Kubernetes
 
@@ -200,76 +73,38 @@ Helm
 
 Docker
 
-GitHub
+Git & GitHub
 
-📂 Repository Structure
-project-2-eks/
-│
-├── docs/
-│   ├── ARCHITECTURE.md
-│   ├── DECISIONS.md
-│   ├── ASSESSMENT.md
-│   └── RUNBOOK.md
-│
-├── terraform/
-│   └── main.tf
-│
-├── k8s/
-│   ├── deployment.yaml
-│   ├── service.yaml
-│   └── hpa.yaml
-│
-├── helm/
-│   └── Chart.yaml
-│
-└── README.md
-📈 Scaling Strategy
+🚀 How to Deploy
 
-This project uses:
+Provision infrastructure with Terraform
 
-Horizontal Pod Autoscaler (HPA) to scale WordPress pods based on CPU usage
+terraform init
+terraform apply
 
-Kubernetes self-healing to automatically restart failed containers
+Configure kubectl to connect to EKS
 
-Multiple replicas for high availability
+Deploy Kubernetes manifests
 
-🗃 Why MariaDB as a StatefulSet?
+kubectl apply -f k8s/
 
-Databases require:
+Verify deployment
 
-Persistent storage
+kubectl get pods
+kubectl get svc
+🎯 What I Learned
 
-Stable network identity
+Designing scalable container-based systems
 
-Ordered startup and shutdown
+Difference between stateless and stateful workloads
 
-A StatefulSet ensures the database maintains its data and identity even if pods restart.
+Auto-scaling strategies in Kubernetes
 
-🎯 Key Learning Outcomes
+Infrastructure as Code best practices
 
-Understanding Kubernetes architecture
+Production-ready deployment patterns
 
-Deploying workloads on EKS
+💼 Author
 
-Implementing auto-scaling strategies
-
-Managing stateful vs stateless applications
-
-Infrastructure as Code using Terraform
-
-🚀 Future Improvements
-
-Add CI/CD pipeline using GitHub Actions or Jenkins
-
-Implement monitoring with Prometheus & Grafana
-
-Use AWS Load Balancer Controller
-
-Add Secrets Manager integration
-
-Implement production-grade security hardening
-
-💡 Author
-
-Adama Sannoh                                                                                       Cloud Engineer | AWS & Kubernetes Focused
-Infrastructure as Code • Scalable Systems • Production-Ready Deployments
+Adama Sannoh
+Cloud Engineer | AWS & KubernetesCgit 
